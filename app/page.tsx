@@ -244,36 +244,48 @@ export default function Home() {
           />
         </div>
 
-        {/* Theme Selector */}
-        {templateThemes[selectedTemplate as keyof typeof templateThemes] && (
-          <div className="mb-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3">
-            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              主题配色 - {templates.find(t => t.id === selectedTemplate)?.name}
-            </h3>
-            <div className="flex flex-wrap gap-1.5">
-              {templateThemes[selectedTemplate as keyof typeof templateThemes].map((theme, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleThemeChange(index)}
-                  className={`
-                    flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all
-                    ${
-                      selectedTheme === index
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                    }
-                  `}
-                >
-                  <span
-                    className="w-3.5 h-3.5 rounded-full border-2 border-white shadow"
-                    style={{ backgroundColor: theme.primary }}
-                  />
-                  <span className="text-sm font-medium">{theme.name}</span>
-                </button>
-              ))}
+        {/* Theme Selector and Style Panel */}
+        <div className="mb-4 flex flex-wrap gap-4">
+          {templateThemes[selectedTemplate as keyof typeof templateThemes] && (
+            <div className="flex-1 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3">
+              <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                主题配色 - {templates.find(t => t.id === selectedTemplate)?.name}
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {templateThemes[selectedTemplate as keyof typeof templateThemes].map((theme, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleThemeChange(index)}
+                    className={`
+                      flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all
+                      ${
+                        selectedTheme === index
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }
+                    `}
+                  >
+                    <span
+                      className="w-3.5 h-3.5 rounded-full border-2 border-white shadow"
+                      style={{ backgroundColor: theme.primary }}
+                    />
+                    <span className="text-sm font-medium">{theme.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
+          )}
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3">
+            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              样式调整
+            </h3>
+            <StylePanel
+              styleConfig={styleConfig}
+              onStyleChange={setStyleConfig}
+            />
           </div>
-        )}
+        </div>
 
         {/* Editor and Preview */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -306,14 +318,6 @@ export default function Home() {
               styleConfig={styleConfig}
             />
           </div>
-        </div>
-
-        {/* Style Panel */}
-        <div className="mt-4">
-          <StylePanel
-            styleConfig={styleConfig}
-            onStyleChange={setStyleConfig}
-          />
         </div>
       </div>
 
