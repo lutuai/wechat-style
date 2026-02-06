@@ -136,56 +136,42 @@ export default function Home() {
     if (!previewElement) return
 
     const clone = previewElement.cloneNode(true) as HTMLElement
-
-    const computedStyle = window.getComputedStyle(previewElement)
-
-    const primaryColor = styleConfig.primaryColor
-    const secondaryColor = styleConfig.secondaryColor
-
     clone.style.maxWidth = '677px'
     clone.style.margin = '0 auto'
     clone.style.padding = '20px'
-    clone.style.backgroundColor = computedStyle.backgroundColor
-    clone.style.fontSize = `${styleConfig.fontSize}px`
-    clone.style.lineHeight = `${styleConfig.lineHeight}`
-    clone.style.color = computedStyle.color
-    clone.style.fontFamily = computedStyle.fontFamily
 
-    const elements = clone.querySelectorAll('*')
-    elements.forEach((el: HTMLElement) => {
-      const tagName = el.tagName.toLowerCase()
+    const elements = previewElement.querySelectorAll('*')
+    const cloneElements = clone.querySelectorAll('*')
 
-      if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3') {
-        el.style.color = primaryColor
-        el.style.fontFamily = computedStyle.getPropertyValue('--heading-font') || 'inherit'
-      }
+    elements.forEach((originalEl, index) => {
+      const cloneEl = cloneElements[index] as HTMLElement
+      if (!cloneEl) return
 
-      if (tagName === 'p') {
-        el.style.fontFamily = computedStyle.getPropertyValue('--body-font') || 'inherit'
-        el.style.fontSize = `${styleConfig.fontSize}px`
-        el.style.lineHeight = `${styleConfig.lineHeight}`
-      }
+      const computedStyle = window.getComputedStyle(originalEl)
+      const tagName = originalEl.tagName.toLowerCase()
 
-      if (tagName === 'blockquote') {
-        const styles = window.getComputedStyle(el)
-        el.style.backgroundColor = styles.backgroundColor
-        el.style.borderLeftColor = primaryColor
-        el.style.padding = '10px 15px'
-        el.style.margin = '15px 0'
-      }
+      cloneEl.style.color = computedStyle.color
+      cloneEl.style.backgroundColor = computedStyle.backgroundColor
+      cloneEl.style.fontFamily = computedStyle.fontFamily
+      cloneEl.style.fontSize = computedStyle.fontSize
+      cloneEl.style.lineHeight = computedStyle.lineHeight
+      cloneEl.style.fontWeight = computedStyle.fontWeight
+      cloneEl.style.padding = computedStyle.padding
+      cloneEl.style.margin = computedStyle.margin
+      cloneEl.style.border = computedStyle.border
+      cloneEl.style.borderLeft = computedStyle.borderLeft
+      cloneEl.style.borderLeftColor = computedStyle.borderLeftColor
+      cloneEl.style.borderLeftWidth = computedStyle.borderLeftWidth
+      cloneEl.style.borderLeftStyle = computedStyle.borderLeftStyle
+      cloneEl.style.borderRadius = computedStyle.borderRadius
+      cloneEl.style.textAlign = computedStyle.textAlign
+      cloneEl.style.textDecoration = computedStyle.textDecoration
 
-      if (tagName === 'strong' || tagName === 'b') {
-        el.style.color = primaryColor
-      }
-
-      if (tagName === 'a') {
-        el.style.color = primaryColor
-      }
-
-      if (tagName === 'code') {
-        el.style.backgroundColor = '#f5f5f5'
-        el.style.padding = '2px 6px'
-        el.style.borderRadius = '3px'
+      if (tagName === 'img') {
+        cloneEl.style.maxWidth = computedStyle.maxWidth
+        cloneEl.style.height = computedStyle.height
+        cloneEl.style.borderRadius = computedStyle.borderRadius
+        cloneEl.style.boxShadow = computedStyle.boxShadow
       }
     })
 
