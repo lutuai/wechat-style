@@ -309,3 +309,275 @@ body {
   font-style: italic;
   color: #5A5A5A;
 }
+
+.template-news.wechat-article {
+  background: #FFFFFF;
+}
+
+.template-news.wechat-article h1 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid currentColor;
+}
+
+.template-news.wechat-article h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 25px 0 15px;
+  padding-left: 15px;
+  border-left: 5px solid currentColor;
+  background: linear-gradient(90deg, currentColor15, transparent);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.template-news.wechat-article h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: currentColor;
+  margin: 20px 0 12px;
+}
+
+.template-news.wechat-article blockquote {
+  background: #F8F9FA;
+  border-left: 4px solid currentColor;
+  padding: 15px 20px;
+  margin: 18px 0;
+  position: relative;
+}
+
+.template-news.wechat-article blockquote::before {
+  content: '■';
+  position: absolute;
+  left: 8px;
+  top: 15px;
+  color: currentColor;
+  font-size: 12px;
+}
+
+.template-news.wechat-article strong {
+  color: currentColor;
+  font-weight: 700;
+}
+
+.template-academic.wechat-article {
+  background: #FFFEF8;
+}
+
+.template-academic.wechat-article h1 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px;
+  color: #1A1A1A;
+}
+
+.template-academic.wechat-article h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 25px 0 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #8B4513;
+}
+
+.template-academic.wechat-article h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  color: #4A4A4A;
+}
+
+.template-academic.wechat-article p {
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+.template-academic.wechat-article blockquote {
+  background: #F5F5DC;
+  border: none;
+  border-left: 4px solid #8B4513;
+  padding: 18px 25px;
+  margin: 20px 0;
+  font-style: italic;
+}
+
+.template-academic.wechat-article blockquote::before {
+  content: '—';
+  margin-right: 8px;
+  color: #8B4513;
+}
+
+.template-literary.wechat-article {
+  background: #FFFAFA;
+}
+
+.template-literary.wechat-article h1 {
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  margin: 35px 0 25px;
+  color: #8B0000;
+  letter-spacing: 2px;
+}
+
+.template-literary.wechat-article h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin: 28px 0 18px;
+  color: #8B0000;
+  text-align: center;
+  position: relative;
+}
+
+.template-literary.wechat-article h2::before,
+.template-literary.wechat-article h2::after {
+  content: '◆';
+  color: #DAA520;
+  margin: 0 15px;
+  font-size: 14px;
+}
+
+.template-literary.wechat-article h3 {
+  font-size: 19px;
+  font-weight: 400;
+  margin: 22px 0 14px;
+  color: #8B0000;
+  text-indent: 2em;
+}
+
+.template-literary.wechat-article p {
+  text-indent: 2em;
+  line-height: 2;
+}
+
+.template-literary.wechat-article blockquote {
+  background: #FFF8DC;
+  border: 2px solid #DAA520;
+  padding: 20px 30px;
+  margin: 25px 0;
+  text-align: center;
+  font-style: italic;
+  border-radius: 8px;
+}
+
+.template-literary.wechat-article blockquote::before {
+  content: '❝';
+  display: block;
+  font-size: 32px;
+  color: #DAA520;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.template-modern.wechat-article {
+  background: #F8F9FA;
+}
+
+.template-modern.wechat-article h1 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px;
+  background: linear-gradient(135deg, currentColor 0%, currentColor66 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.template-modern.wechat-article h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 25px 0 15px;
+  padding: 12px 18px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid currentColor;
+}
+
+.template-modern.wechat-article h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  color: currentColor;
+}
+
+.template-modern.wechat-article blockquote {
+  background: linear-gradient(135deg, currentColor15 0%, currentColor08 100%);
+  border-left: 4px solid currentColor;
+  padding: 18px 22px;
+  margin: 20px 0;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.template-modern.wechat-article strong {
+  color: currentColor;
+  font-weight: 700;
+}
+
+.template-modern.wechat-article a {
+  color: currentColor;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor33;
+}
+
+.template-classic.wechat-article {
+  background: #FFFFFF;
+}
+
+.template-classic.wechat-article h1 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px;
+  color: #1A252F;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.template-classic.wechat-article h2 {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 25px 0 15px;
+  color: #1A252F;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 8px;
+}
+
+.template-classic.wechat-article h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  color: currentColor;
+}
+
+.template-classic.wechat-article blockquote {
+  background: #ECF0F1;
+  border-left: 4px solid currentColor;
+  padding: 15px 20px;
+  margin: 18px 0;
+}
+
+.template-classic.wechat-article blockquote::before {
+  content: '💡';
+  margin-right: 10px;
+}
+
+.template-classic.wechat-article strong {
+  color: currentColor;
+  font-weight: 700;
+}
+
+.template-classic.wechat-article ul,
+.template-classic.wechat-article ol {
+  padding-left: 25px;
+}
+
+.template-classic.wechat-article li {
+  margin: 10px 0;
+  padding-left: 8px;
+}

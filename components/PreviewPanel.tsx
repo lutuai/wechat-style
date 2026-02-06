@@ -92,6 +92,76 @@ export default function PreviewPanel({ markdown, template, styleConfig }: Previe
           accent: styleConfig.secondaryColor,
           templateClass: 'template-zen',
         }
+      case 'news':
+        return {
+          ...baseStyles,
+          backgroundColor: '#FFFFFF',
+          color: '#333333',
+          headingColor: '#1A1A1A',
+          headingFont: '"PingFang SC", "Microsoft YaHei", sans-serif',
+          bodyFont: '"PingFang SC", "Microsoft YaHei", sans-serif',
+          quoteBg: '#F8F9FA',
+          quoteBorder: styleConfig.primaryColor,
+          codeBg: '#F5F5F5',
+          accent: styleConfig.primaryColor,
+          templateClass: 'template-news',
+        }
+      case 'academic':
+        return {
+          ...baseStyles,
+          backgroundColor: '#FFFEF8',
+          color: '#2C2C2C',
+          headingColor: '#1A1A1A',
+          headingFont: '"Times New Roman", "SimSun", serif',
+          bodyFont: '"Times New Roman", "SimSun", serif',
+          quoteBg: '#F5F5DC',
+          quoteBorder: '#8B4513',
+          codeBg: '#FAF0E6',
+          accent: styleConfig.primaryColor,
+          templateClass: 'template-academic',
+        }
+      case 'literary':
+        return {
+          ...baseStyles,
+          backgroundColor: '#FFFAFA',
+          color: '#4A4A4A',
+          headingColor: '#8B0000',
+          headingFont: '"KaiTi", "STKaiti", serif',
+          bodyFont: '"FangSong", "STFangsong", serif',
+          quoteBg: '#FFF8DC',
+          quoteBorder: '#DAA520',
+          codeBg: '#FAFAD2',
+          accent: '#8B0000',
+          templateClass: 'template-literary',
+        }
+      case 'modern':
+        return {
+          ...baseStyles,
+          backgroundColor: '#F8F9FA',
+          color: '#212529',
+          headingColor: styleConfig.primaryColor,
+          headingFont: '"SF Pro Display", -apple-system, sans-serif',
+          bodyFont: '"SF Pro Text", -apple-system, sans-serif',
+          quoteBg: 'linear-gradient(135deg, ' + styleConfig.primaryColor + '15 0%, ' + styleConfig.secondaryColor + '15 100%)',
+          quoteBorder: styleConfig.primaryColor,
+          codeBg: '#E9ECEF',
+          accent: styleConfig.primaryColor,
+          templateClass: 'template-modern',
+        }
+      case 'classic':
+        return {
+          ...baseStyles,
+          backgroundColor: '#FFFFFF',
+          color: '#2C3E50',
+          headingColor: '#1A252F',
+          headingFont: '"Arial", "Helvetica", sans-serif',
+          bodyFont: '"Arial", "Helvetica", sans-serif',
+          quoteBg: '#ECF0F1',
+          quoteBorder: styleConfig.primaryColor,
+          codeBg: '#F8F9FA',
+          accent: styleConfig.primaryColor,
+          templateClass: 'template-classic',
+        }
       default:
         return baseStyles
     }

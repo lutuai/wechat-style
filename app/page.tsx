@@ -28,21 +28,108 @@ export default function Home() {
 > 选择合适的模板，让你的文章脱颖而出！
 `)
 
-  const [selectedTemplate, setSelectedTemplate] = useState('editorial')
+  const [selectedTemplate, setSelectedTemplate] = useState('news')
   const [styleConfig, setStyleConfig] = useState({
     fontSize: 16,
     lineHeight: 1.75,
-    primaryColor: '#3B82F6',
-    secondaryColor: '#8B5CF6',
+    primaryColor: '#0066CC',
+    secondaryColor: '#00A0E9',
   })
 
   const templates = [
-    { id: 'editorial', name: '杂志风', icon: '📰' },
-    { id: 'brutalist', name: '野兽派', icon: '🎨' },
-    { id: 'glassmorphism', name: '毛玻璃', icon: '🔮' },
-    { id: 'swiss', name: '瑞士设计', icon: '🇨🇭' },
-    { id: 'zen', name: '禅意', icon: '☯️' },
+    { id: 'editorial', name: '杂志风', icon: '📰', category: 'editorial' },
+    { id: 'brutalist', name: '野兽派', icon: '🎨', category: 'creative' },
+    { id: 'glassmorphism', name: '毛玻璃', icon: '🔮', category: 'creative' },
+    { id: 'swiss', name: '瑞士设计', icon: '🇨🇭', category: 'minimal' },
+    { id: 'zen', name: '禅意', icon: '☯️', category: 'minimal' },
+    { id: 'news', name: '新闻资讯', icon: '📰', category: 'business' },
+    { id: 'academic', name: '学术论文', icon: '📚', category: 'formal' },
+    { id: 'literary', name: '简约文艺', icon: '🌸', category: 'literary' },
+    { id: 'modern', name: '现代科技', icon: '⚡', category: 'tech' },
+    { id: 'classic', name: '经典商务', icon: '💼', category: 'business' },
   ]
+
+  const templateThemes = {
+    editorial: [
+      { name: '酒红', primary: '#722F37', secondary: '#8B3A43' },
+      { name: '深蓝', primary: '#1E3A5F', secondary: '#2C5282' },
+      { name: '墨绿', primary: '#2D5A3D', secondary: '#3D7A52' },
+    ],
+    brutalist: [
+      { name: '黄黑', primary: '#000000', secondary: '#FFD600' },
+      { name: '红白', primary: '#000000', secondary: '#FF0000' },
+      { name: '蓝白', primary: '#000000', secondary: '#0066FF' },
+    ],
+    glassmorphism: [
+      { name: '紫蓝', primary: '#6366F1', secondary: '#8B5CF6' },
+      { name: '青绿', primary: '#06B6D4', secondary: '#10B981' },
+      { name: '粉橙', primary: '#F43F5E', secondary: '#F97316' },
+    ],
+    swiss: [
+      { name: '经典红', primary: '#FF3B30', secondary: '#FF6B6B' },
+      { name: '瑞士蓝', primary: '#007AFF', secondary: '#5AC8FA' },
+      { name: '活力黄', primary: '#FFCC00', secondary: '#FFD60A' },
+    ],
+    zen: [
+      { name: '禅意棕', primary: '#8B7355', secondary: '#A0896C' },
+      { name: '青灰', primary: '#5F8D78', secondary: '#7BA89C' },
+      { name: '墨韵', primary: '#4A5568', secondary: '#718096' },
+    ],
+    news: [
+      { name: '科技蓝', primary: '#0066CC', secondary: '#00A0E9' },
+      { name: '财经绿', primary: '#00A86B', secondary: '#20B2AA' },
+      { name: '热门红', primary: '#E60012', secondary: '#FF6B6B' },
+      { name: '深空灰', primary: '#2C3E50', secondary: '#34495E' },
+    ],
+    academic: [
+      { name: '学术蓝', primary: '#003366', secondary: '#0055A4' },
+      { name: '严谨黑', primary: '#1A1A1A', secondary: '#4A4A4A' },
+      { name: '经典棕', primary: '#8B4513', secondary: '#A0522D' },
+    ],
+    literary: [
+      { name: '古韵红', primary: '#8B0000', secondary: '#B22222' },
+      { name: '水墨青', primary: '#2F4F4F', secondary: '#696969' },
+      { name: '桃花粉', primary: '#DB7093', secondary: '#E9967A' },
+    ],
+    modern: [
+      { name: '科技紫', primary: '#8B5CF6', secondary: '#A78BFA' },
+      { name: '未来蓝', primary: '#0EA5E9', secondary: '#38BDF8' },
+      { name: '活力橙', primary: '#F97316', secondary: '#FB923C' },
+      { name: '渐变绿', primary: '#10B981', secondary: '#34D399' },
+    ],
+    classic: [
+      { name: '商务蓝', primary: '#1E40AF', secondary: '#3B82F6' },
+      { name: '稳重灰', primary: '#374151', secondary: '#6B7280' },
+      { name: '精英绿', primary: '#047857', secondary: '#059669' },
+    ],
+  }
+
+  const [selectedTheme, setSelectedTheme] = useState(0)
+
+  const handleTemplateChange = (templateId: string) => {
+    setSelectedTemplate(templateId)
+    setSelectedTheme(0)
+    const themes = templateThemes[templateId as keyof typeof templateThemes]
+    if (themes && themes[0]) {
+      setStyleConfig({
+        ...styleConfig,
+        primaryColor: themes[0].primary,
+        secondaryColor: themes[0].secondary,
+      })
+    }
+  }
+
+  const handleThemeChange = (themeIndex: number) => {
+    setSelectedTheme(themeIndex)
+    const themes = templateThemes[selectedTemplate as keyof typeof templateThemes]
+    if (themes && themes[themeIndex]) {
+      setStyleConfig({
+        ...styleConfig,
+        primaryColor: themes[themeIndex].primary,
+        secondaryColor: themes[themeIndex].secondary,
+      })
+    }
+  }
 
   const handleCopy = async () => {
     const previewElement = document.getElementById('preview-content')
@@ -155,9 +242,40 @@ export default function Home() {
           <TemplateSelector
             templates={templates}
             selectedTemplate={selectedTemplate}
-            onTemplateChange={setSelectedTemplate}
+            onTemplateChange={handleTemplateChange}
           />
         </div>
+
+        {/* Theme Selector */}
+        {templateThemes[selectedTemplate as keyof typeof templateThemes] && (
+          <div className="mb-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              主题配色 - {templates.find(t => t.id === selectedTemplate)?.name}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {templateThemes[selectedTemplate as keyof typeof templateThemes].map((theme, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleThemeChange(index)}
+                  className={`
+                    flex items-center gap-2 px-4 py-2 rounded-lg transition-all
+                    ${
+                      selectedTheme === index
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    }
+                  `}
+                >
+                  <span
+                    className="w-4 h-4 rounded-full border-2 border-white shadow"
+                    style={{ backgroundColor: theme.primary }}
+                  />
+                  <span className="font-medium">{theme.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Editor and Preview */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
