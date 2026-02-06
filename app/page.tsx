@@ -190,7 +190,7 @@ export default function Home() {
             'text/plain': new Blob([previewElement.innerText], { type: 'text/plain' })
           })
         ])
-        alert('✅ 已复制HTML到剪贴板！\n\n直接粘贴到微信公众号编辑器即可使用')
+        console.log('✅ 已复制到剪贴板')
       } catch (err) {
         console.error('复制失败:', err)
 
@@ -200,9 +200,9 @@ export default function Home() {
         textArea.select()
         try {
           document.execCommand('copy')
-          alert('✅ 已复制HTML到剪贴板！\n\n直接粘贴到微信公众号编辑器即可使用')
+          console.log('✅ 已复制到剪贴板')
         } catch (e) {
-          alert('❌ 复制失败，请手动选择预览区域内容复制')
+          console.error('❌ 复制失败')
         }
         document.body.removeChild(textArea)
       }
