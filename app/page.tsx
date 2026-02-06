@@ -133,79 +133,96 @@ export default function Home() {
 
   const handleCopy = async () => {
     const previewElement = document.getElementById('preview-content')
-    if (previewElement) {
-      const computedStyles = window.getComputedStyle(previewElement)
+    if (!previewElement) return
 
-      const inlineStyledHtml = previewElement.innerHTML.replace(/<([a-z][a-z0-9]*)\s+([^>]*?)>/gi, (match, tag, attrs) => {
-        const element = document.createElement(tag)
+    const clone = previewElement.cloneNode(true) as HTMLElement
 
-        if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
-          element.style.fontFamily = computedStyles.getPropertyValue('--heading-font') || 'inherit'
-          element.style.color = computedStyles.color || 'inherit'
-        }
+    const computedStyle = window.getComputedStyle(previewElement)
 
-        if (tag === 'p') {
-          element.style.fontFamily = computedStyles.getPropertyValue('--body-font') || 'inherit'
-          element.style.fontSize = computedStyles.fontSize || '16px'
-          element.style.lineHeight = computedStyles.lineHeight || '1.75'
-          element.style.color = computedStyles.color || '#333'
-        }
+    const primaryColor = styleConfig.primaryColor
+    const secondaryColor = styleConfig.secondaryColor
 
-        if (tag === 'blockquote') {
-          element.style.backgroundColor = computedStyles.backgroundColor || '#f5f5f5'
-          element.style.borderLeftColor = computedStyles.borderLeftColor || '#888'
-          element.style.padding = '10px 15px'
-          element.style.margin = '15px 0'
-        }
+    clone.style.maxWidth = '677px'
+    clone.style.margin = '0 auto'
+    clone.style.padding = '20px'
+    clone.style.backgroundColor = computedStyle.backgroundColor
+    clone.style.fontSize = `${styleConfig.fontSize}px`
+    clone.style.lineHeight = `${styleConfig.lineHeight}`
+    clone.style.color = computedStyle.color
+    clone.style.fontFamily = computedStyle.fontFamily
 
-        if (tag === 'code') {
-          element.style.backgroundColor = '#f5f5f5'
-          element.style.padding = '2px 6px'
-          element.style.borderRadius = '3px'
-          element.style.fontFamily = 'monospace'
-        }
+    const elements = clone.querySelectorAll('*')
+    elements.forEach((el: HTMLElement) => {
+      const tagName = el.tagName.toLowerCase()
 
-        if (tag === 'strong' || tag === 'b') {
-          element.style.color = styleConfig.primaryColor
-        }
+      if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3') {
+        el.style.color = primaryColor
+        el.style.fontFamily = computedStyle.getPropertyValue('--heading-font') || 'inherit'
+      }
 
-        if (tag === 'a') {
-          element.style.color = styleConfig.primaryColor
-          element.style.textDecoration = 'underline'
-        }
+      if (tagName === 'p') {
+        el.style.fontFamily = computedStyle.getPropertyValue('--body-font') || 'inherit'
+        el.style.fontSize = `${styleConfig.fontSize}px`
+        el.style.lineHeight = `${styleConfig.lineHeight}`
+      }
 
-        return `<${tag}${attrs}>`
-      })
+      if (tagName === 'blockquote') {
+        const styles = window.getComputedStyle(el)
+        el.style.backgroundColor = styles.backgroundColor
+        el.style.borderLeftColor = primaryColor
+        el.style.padding = '10px 15px'
+        el.style.margin = '15px 0'
+      }
 
-      const fullHtml = `
-        <section style="max-width: 677px; margin: 0 auto; padding: 20px; background: ${previewElement.style.backgroundColor || '#fff'}; font-size: ${styleConfig.fontSize}px; line-height: ${styleConfig.lineHeight}; color: ${previewElement.style.color || '#333'};">
-          ${inlineStyledHtml}
-        </section>
-      `
+      if (tagName === 'strong' || tagName === 'b') {
+        el.style.color = primaryColor
+      }
+
+      if (tagName === 'a') {
+        el.style.color = primaryColor
+      }
+
+      if (tagName === 'code') {
+        el.style.backgroundColor = '#f5f5f5'
+        el.style.padding = '2px 6px'
+        el.style.borderRadius = '3px'
+      }
+    })
+
+    const htmlContent = clone.innerHTML
+
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'text/html': new Blob([htmlContent], { type: 'text/html' }),
+          'text/plain': new Blob([previewElement.innerText], { type: 'text/plain' })
+        })
+      ])
+      console.log('✅ 已复制HTML到剪贴板')
+    } catch (err) {
+      console.error('Clipboard API失败，尝试备用方案:', err)
+
+      const tempDiv = document.createElement('div')
+      tempDiv.innerHTML = htmlContent
+      tempDiv.style.position = 'fixed'
+      tempDiv.style.left = '-9999px'
+      document.body.appendChild(tempDiv)
+
+      const range = document.createRange()
+      range.selectNodeContents(tempDiv)
+      const selection = window.getSelection()
+      selection.removeAllRanges()
+      selection.addRange(range)
 
       try {
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            'text/html': new Blob([fullHtml], { type: 'text/html' }),
-            'text/plain': new Blob([previewElement.innerText], { type: 'text/plain' })
-          })
-        ])
-        console.log('✅ 已复制到剪贴板')
-      } catch (err) {
-        console.error('复制失败:', err)
-
-        const textArea = document.createElement('textarea')
-        textArea.value = fullHtml
-        document.body.appendChild(textArea)
-        textArea.select()
-        try {
-          document.execCommand('copy')
-          console.log('✅ 已复制到剪贴板')
-        } catch (e) {
-          console.error('❌ 复制失败')
-        }
-        document.body.removeChild(textArea)
+        document.execCommand('copy')
+        console.log('✅ 已复制HTML到剪贴板')
+      } catch (e) {
+        console.error('❌ 复制失败', e)
       }
+
+      selection.removeAllRanges()
+      document.body.removeChild(tempDiv)
     }
   }
 
