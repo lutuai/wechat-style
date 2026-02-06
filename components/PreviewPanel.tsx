@@ -295,19 +295,22 @@ export default function PreviewPanel({ markdown, template, styleConfig }: Previe
                 {children}
               </a>
             ),
-            img: ({ src, alt }) => (
-              <img
-                src={src}
-                alt={alt}
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  borderRadius: template === 'glassmorphism' ? '12px' : '0',
-                  boxShadow: template === 'brutalist' ? '4px 4px 0 #000' : 'none',
-                }}
-                className={styles.templateClass}
-              />
-            ),
+            img: ({ src, alt }) => {
+              if (!src) return null
+              return (
+                <img
+                  src={src}
+                  alt={alt || '图片'}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    borderRadius: template === 'glassmorphism' ? '12px' : '0',
+                    boxShadow: template === 'brutalist' ? '4px 4px 0 #000' : 'none',
+                  }}
+                  className={styles.templateClass}
+                />
+              )
+            },
           }}
         >
           {markdown}
