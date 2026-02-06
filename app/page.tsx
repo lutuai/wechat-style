@@ -246,17 +246,17 @@ export default function Home() {
 
         {/* Theme Selector */}
         {templateThemes[selectedTemplate as keyof typeof templateThemes] && (
-          <div className="mb-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          <div className="mb-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3">
+            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">
               主题配色 - {templates.find(t => t.id === selectedTemplate)?.name}
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {templateThemes[selectedTemplate as keyof typeof templateThemes].map((theme, index) => (
                 <button
                   key={index}
                   onClick={() => handleThemeChange(index)}
                   className={`
-                    flex items-center gap-2 px-4 py-2 rounded-lg transition-all
+                    flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all
                     ${
                       selectedTheme === index
                         ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
@@ -265,10 +265,10 @@ export default function Home() {
                   `}
                 >
                   <span
-                    className="w-4 h-4 rounded-full border-2 border-white shadow"
+                    className="w-3.5 h-3.5 rounded-full border-2 border-white shadow"
                     style={{ backgroundColor: theme.primary }}
                   />
-                  <span className="font-medium">{theme.name}</span>
+                  <span className="text-sm font-medium">{theme.name}</span>
                 </button>
               ))}
             </div>
