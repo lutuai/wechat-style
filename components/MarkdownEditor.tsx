@@ -53,15 +53,19 @@ export default function MarkdownEditor({ value, onChange }: MarkdownEditorProps)
 
         const file = item.getAsFile()
         if (file) {
-          const { compressImage, generateImageMarkdown } = await import('@/lib/imageUtils')
+          if (file.size > 10 * 1024 * 1024) {
+            alert('图片太大，请使用小于10MB的图片')
+            return
+          }
 
           try {
+            const { compressImage, generateImageMarkdown } = await import('@/lib/imageUtils')
             const compressedDataUrl = await compressImage(file, 1080, 0.8)
             const markdown = generateImageMarkdown(compressedDataUrl, '粘贴的图片')
             handleInsertImage(markdown)
           } catch (error) {
             console.error('图片处理失败:', error)
-            alert('图片处理失败，请重试')
+            alert('图片处理失败：' + (error instanceof Error ? error.message : '未知错误'))
           }
         }
         break
