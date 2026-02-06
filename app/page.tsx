@@ -28,6 +28,8 @@ export default function Home() {
 > 选择合适的模板，让你的文章脱颖而出！
 `)
 
+  const [showToast, setShowToast] = useState(false)
+
   const [selectedTemplate, setSelectedTemplate] = useState('news')
   const [styleConfig, setStyleConfig] = useState({
     fontSize: 16,
@@ -184,7 +186,8 @@ export default function Home() {
           'text/plain': new Blob([previewElement.innerText], { type: 'text/plain' })
         })
       ])
-      console.log('✅ 已复制HTML到剪贴板')
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 2000)
     } catch (err) {
       console.error('Clipboard API失败，尝试备用方案:', err)
 
@@ -202,7 +205,8 @@ export default function Home() {
 
       try {
         document.execCommand('copy')
-        console.log('✅ 已复制HTML到剪贴板')
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 2000)
       } catch (e) {
         console.error('❌ 复制失败', e)
       }
@@ -225,15 +229,6 @@ export default function Home() {
               <h1 className="text-xl font-bold text-gray-900 dark:text-white">微信公众号排版工具</h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">智能排版，一键生成</p>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
-            >
-              <Copy size={18} />
-              <span>复制HTML</span>
-            </button>
           </div>
         </div>
       </header>
@@ -295,8 +290,15 @@ export default function Home() {
 
           {/* Right Panel - Preview */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <div className="border-b border-gray-200 dark:border-gray-700 px-4 py-3 bg-gray-50 dark:bg-gray-900">
+            <div className="border-b border-gray-200 dark:border-gray-700 px-4 py-3 bg-gray-50 dark:bg-gray-900 flex items-center justify-between">
               <h2 className="font-semibold text-gray-700 dark:text-gray-300">实时预览</h2>
+              <button
+                onClick={handleCopy}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+              >
+                <Copy size={18} />
+                <span>复制HTML</span>
+              </button>
             </div>
             <PreviewPanel
               markdown={markdown}
@@ -314,6 +316,17 @@ export default function Home() {
           />
         </div>
       </div>
+
+      {showToast && (
+        <div className="fixed top-20 right-4 z-50 animate-in slide-in-from-right-5">
+          <div className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="font-medium">复制成功！</span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
