@@ -144,6 +144,7 @@ export default function Home() {
 
     const elements = previewElement.querySelectorAll('*')
     const cloneElements = clone.querySelectorAll('*')
+    let hasBase64Images = false
 
     elements.forEach((originalEl, index) => {
       const cloneEl = cloneElements[index] as HTMLElement
@@ -170,6 +171,10 @@ export default function Home() {
       cloneEl.style.textDecoration = computedStyle.textDecoration
 
       if (tagName === 'img') {
+        const imgEl = originalEl as HTMLImageElement
+        if (imgEl.src && imgEl.src.startsWith('data:')) {
+          hasBase64Images = true
+        }
         cloneEl.style.maxWidth = computedStyle.maxWidth
         cloneEl.style.height = computedStyle.height
         cloneEl.style.borderRadius = computedStyle.borderRadius
@@ -178,6 +183,11 @@ export default function Home() {
     })
 
     const htmlContent = clone.innerHTML
+
+    if (hasBase64Images) {
+      const proceed = confirm('⚠️ 检测到Base64图片\n\n微信公众号不支持直接粘贴Base64图片。\n\n建议：\n1. 先复制HTML文字内容\n2. 然后手动拖拽图片到微信编辑器\n\n是否继续复制？')
+      if (!proceed) return
+    }
 
     try {
       await navigator.clipboard.write([
