@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Merriweather:wght@300;400;700;900&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.wechat-article {
+  max-width: 677px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  line-height: 1.75;
+  font-size: 16px;
+  color: #333;
+}
+
+.wechat-article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+.wechat-article p {
+  margin: 15px 0;
+  text-indent: 2em;
+}
+
+.wechat-article h1,
+.wechat-article h2,
+.wechat-article h3 {
+  margin: 20px 0 15px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.wechat-article h1 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.wechat-article h2 {
+  font-size: 20px;
+  border-left: 4px solid #3B82F6;
+  padding-left: 10px;
+}
+
+.wechat-article h3 {
+  font-size: 18px;
+}
+
+.wechat-article blockquote {
+  margin: 15px 0;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  border-left: 4px solid #888;
+}
+
+.wechat-article code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.wechat-article pre {
+  background: #2d2d2d;
+  color: #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+.wechat-article pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.template-editorial.wechat-article h1 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin: 30px 0 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid currentColor;
+}
+
+.template-editorial.wechat-article h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 25px 0 15px;
+  border-left: 3px solid currentColor;
+  padding-left: 12px;
+}
+
+.template-editorial.wechat-article blockquote {
+  position: relative;
+  padding: 20px 20px 20px 30px;
+  margin: 20px 0;
+}
+
+.template-editorial.wechat-article blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 8px;
+  top: 5px;
+  font-size: 40px;
+  color: currentColor;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.template-brutalist.wechat-article {
+  border: 3px solid #000;
+}
+
+.template-brutalist.wechat-article h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 4px solid #000;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.template-brutalist.wechat-article h2 {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-left: 4px solid #000;
+  background: #FFD600;
+  padding: 8px 12px;
+  margin: 20px 0;
+}
+
+.template-brutalist.wechat-article blockquote {
+  background: #FFD600;
+  border: 3px solid #000;
+  border-left: 6px solid #000;
+  padding: 15px;
+  font-weight: 600;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.template-brutalist.wechat-article code {
+  background: #F0F0F0;
+  border: 2px solid #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.template-brutalist.wechat-article pre {
+  background: #1A1A1A;
+  border: 3px solid #000;
+  color: #FFD600;
+}
+
+.template-glassmorphism.wechat-article {
+  background: linear-gradient(135deg, #E8F4F8 0%, #F0F9FF 100%);
+}
+
+.template-glassmorphism.wechat-article h1 {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.1);
+  margin: 25px 0;
+}
+
+.template-glassmorphism.wechat-article h2 {
+  font-size: 21px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border-left: 4px solid rgba(99, 102, 241, 0.8);
+  margin: 20px 0;
+}
+
+.template-glassmorphism.wechat-article blockquote {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-left: 4px solid rgba(99, 102, 241, 0.7);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+}
+
+.template-glassmorphism.wechat-article code {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+.template-swiss.wechat-article h1 {
+  font-size: 32px;
+  font-weight: 900;
+  text-align: left;
+  letter-spacing: -1px;
+  margin: 30px 0 20px;
+  text-transform: uppercase;
+}
+
+.template-swiss.wechat-article h2 {
+  font-size: 24px;
+  font-weight: 700;
+  border-left: 6px solid currentColor;
+  padding-left: 15px;
+  margin: 25px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.template-swiss.wechat-article blockquote {
+  background: #F5F5F5;
+  border-left: 5px solid currentColor;
+  padding: 15px 20px;
+  font-weight: 500;
+}
+
+.template-swiss.wechat-article strong {
+  color: currentColor;
+  font-weight: 700;
+}
+
+.template-swiss.wechat-article a {
+  color: currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.template-zen.wechat-article {
+  background: #FAFAFA;
+}
+
+.template-zen.wechat-article h1 {
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 3px;
+  margin: 35px 0 25px;
+  color: #2D2D2D;
+}
+
+.template-zen.wechat-article h2 {
+  font-size: 20px;
+  font-weight: 400;
+  border-left: 2px solid currentColor;
+  padding-left: 15px;
+  margin: 30px 0 20px;
+  color: #2D2D2D;
+  letter-spacing: 1px;
+}
+
+.template-zen.wechat-article p {
+  color: #4A4A4A;
+  letter-spacing: 0.3px;
+}
+
+.template-zen.wechat-article blockquote {
+  background: #F0F0F0;
+  border: none;
+  border-left: 3px solid currentColor;
+  padding: 20px 25px;
+  font-style: italic;
+  color: #5A5A5A;
+}
