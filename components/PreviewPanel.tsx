@@ -184,29 +184,120 @@ export default function PreviewPanel({ markdown, template, styleConfig }: Previe
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            h1: ({ children }) => (
-              <h1
-                style={{
-                  color: styles.headingColor,
-                  fontFamily: styles.headingFont,
-                }}
-                className={styles.templateClass}
-              >
-                {children}
-              </h1>
-            ),
-            h2: ({ children }) => (
-              <h2
-                style={{
-                  color: styles.headingColor,
-                  fontFamily: styles.headingFont,
-                  borderLeftColor: styles.accent,
-                }}
-                className={styles.templateClass}
-              >
-                {children}
-              </h2>
-            ),
+            h1: ({ children }) => {
+              const h1Style: React.CSSProperties = {
+                color: styles.headingColor,
+                fontFamily: styles.headingFont,
+                position: 'relative',
+                paddingBottom: '12px',
+                marginBottom: '24px',
+              }
+
+              if (template === 'editorial') {
+                h1Style.borderBottom = '3px solid ' + styles.accent
+              } else if (template === 'brutalist') {
+                h1Style.border = '4px solid black'
+                h1Style.padding = '16px'
+                h1Style.background = styles.accent
+                h1Style.color = 'white'
+              } else if (template === 'glassmorphism') {
+                h1Style.background = 'linear-gradient(135deg, ' + styles.accent + '20 0%, ' + styles.secondaryColor + '20 100%)'
+                h1Style.padding = '20px'
+                h1Style.borderRadius = '12px'
+                h1Style.backdropFilter = 'blur(10px)'
+              } else if (template === 'swiss') {
+                h1Style.borderLeft = '8px solid ' + styles.accent
+                h1Style.paddingLeft = '16px'
+              } else if (template === 'zen') {
+                h1Style.textAlign = 'center'
+                h1Style.padding = '20px 0'
+                h1Style.borderBottom = '1px solid rgba(0,0,0,0.1)'
+              } else if (template === 'news') {
+                h1Style.borderLeft = '6px solid ' + styles.accent
+                h1Style.paddingLeft = '16px'
+                h1Style.background = 'linear-gradient(to right, ' + styles.accent + '10, transparent 10)'
+              } else if (template === 'academic') {
+                h1Style.textAlign = 'center'
+                h1Style.borderBottom = '2px double ' + styles.accent
+              } else if (template === 'literary') {
+                h1Style.textAlign = 'center'
+                h1Style.padding = '20px'
+                h1Style.background = styles.accent + '15'
+                h1Style.borderRadius = '8px'
+              } else if (template === 'modern') {
+                h1Style.background = 'linear-gradient(135deg, ' + styles.accent + ' 0%, ' + styles.secondaryColor + ' 100%)'
+                h1Style.WebkitBackgroundClip = 'text'
+                h1Style.WebkitTextFillColor = 'transparent'
+                h1Style.backgroundClip = 'text'
+              } else if (template === 'classic') {
+                h1Style.borderBottom = '2px solid ' + styles.accent
+                h1Style.paddingBottom = '8px'
+              }
+
+              return (
+                <h1 style={h1Style} className={styles.templateClass}>
+                  {children}
+                </h1>
+              )
+            },
+            h2: ({ children }) => {
+              const h2Style: React.CSSProperties = {
+                color: styles.headingColor,
+                fontFamily: styles.headingFont,
+                marginTop: '32px',
+                marginBottom: '16px',
+                position: 'relative',
+              }
+
+              if (template === 'editorial') {
+                h2Style.borderLeft = '4px solid ' + styles.accent
+                h2Style.paddingLeft = '12px'
+              } else if (template === 'brutalist') {
+                h2Style.background = styles.accent
+                h2Style.color = 'white'
+                h2Style.padding = '8px 16px'
+                h2Style.display = 'inline-block'
+              } else if (template === 'glassmorphism') {
+                h2Style.background = 'rgba(255,255,255,0.6)'
+                h2Style.padding = '12px 20px'
+                h2Style.borderRadius = '8px'
+                h2Style.borderLeft = '4px solid ' + styles.accent
+              } else if (template === 'swiss') {
+                h2Style.borderBottom = '3px solid ' + styles.accent
+                h2Style.paddingBottom = '8px'
+                h2Style.display = 'inline-block'
+              } else if (template === 'zen') {
+                h2Style.textAlign = 'center'
+                h2Style.color = styles.accent
+                h2Style.padding = '12px 0'
+              } else if (template === 'news') {
+                h2Style.borderLeft = '4px solid ' + styles.accent
+                h2Style.paddingLeft = '12px'
+                h2Style.background = styles.accent + '10'
+              } else if (template === 'academic') {
+                h2Style.textAlign = 'center'
+                h2Style.borderBottom = '1px dashed ' + styles.accent
+                h2Style.paddingBottom = '8px'
+              } else if (template === 'literary') {
+                h2Style.textAlign = 'center'
+                h2Style.color = styles.accent
+                h2Style.padding = '8px 0'
+                h2Style.borderBottom = '1px dotted ' + styles.accent
+              } else if (template === 'modern') {
+                h2Style.borderLeft = '4px solid ' + styles.accent
+                h2Style.paddingLeft = '12px'
+                h2Style.position = 'relative'
+              } else if (template === 'classic') {
+                h2Style.borderLeft = '3px solid ' + styles.accent
+                h2Style.paddingLeft = '12px'
+              }
+
+              return (
+                <h2 style={h2Style} className={styles.templateClass}>
+                  {children}
+                </h2>
+              )
+            },
             h3: ({ children }) => (
               <h3
                 style={{
